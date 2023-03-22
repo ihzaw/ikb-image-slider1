@@ -37,7 +37,6 @@ export default function ImageSlider1(props) {
   useEffect(() => {
     if (dragging) {
       function handleMouseMove(event) {
-        console.log(xPosition);
         const distance = event.clientX - startPosition;
         if (distance + xPosition > minX) {
           if (distance + xPosition < 0) {
@@ -57,8 +56,6 @@ export default function ImageSlider1(props) {
   for (let i = 0; i < props.slides.length; i++) {
     totalWidth = totalWidth + props.slides[i].width + imageGap;
   }
-  console.log('total width :', totalWidth)
-  console.log('parent width :', parentWidth)
   averageWidth = totalWidth / props.slides.length;
 
   const updateSlider = () => {
@@ -77,11 +74,8 @@ export default function ImageSlider1(props) {
 
   const nextX = () => {
     const newX = xPosition - averageWidth;
-    console.log(xPosition, '-', averageWidth, '=', newX)
-    console.log('minimum =', minX)
     if (newX < minX) {
       changeXPosition(minX);
-      console.log('min x :', minX)
     } else {
       changeXPosition(xPosition - averageWidth);
     }
@@ -102,7 +96,6 @@ export default function ImageSlider1(props) {
   function handleMouseDown(event) {
     event.preventDefault(); // Prevents the default behavior of the browser for dragging
     if (event.target.closest(".slider") === sliderRef.current) {
-      console.log("down");
       setDragging(true);
       setStartPosition(event.clientX);
       setSlideDuration("0s");
